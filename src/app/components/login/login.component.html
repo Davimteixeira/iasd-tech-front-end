@@ -26,6 +26,11 @@
           <mat-spinner *ngIf="isLoading" diameter="24"></mat-spinner>
           <span *ngIf="!isLoading">Entrar</span>
         </button>
+
+        <div class="register-link">
+          <span>Não tem cadastro? <a routerLink="/register">Cadastre-se</a></span>
+        </div>
+        
       </form>
     </mat-card-content>
   </mat-card>
