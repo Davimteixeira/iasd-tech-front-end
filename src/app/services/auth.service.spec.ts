@@ -42,7 +42,7 @@ describe('AuthService', () => {
 
   it('should register user', () => {
     const mockUser = {
-      username: 'testuser', // ✅ Adicionado
+      username: 'testuser', 
       email: 'test@example.com',
       password: 'password123'
     };

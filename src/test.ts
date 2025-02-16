@@ -4,12 +4,10 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 
 declare const require: any;
 
-// Configura o ambiente de testes do Angular
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting()
 );
 
-// Busca todos os arquivos de teste que terminam com .spec.ts
 const context = require.context('./', true, /\.spec\.ts$/);
 context.keys().forEach(context);

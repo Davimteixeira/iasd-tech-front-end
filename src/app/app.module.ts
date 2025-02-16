@@ -54,7 +54,7 @@ import { authGuard } from './guards/auth.guard';
     MatProgressSpinnerModule
   ],
   providers: [
-    provideHttpClient(withInterceptors([authInterceptor])) // ✅ Registro correto
+    provideHttpClient(withInterceptors([authInterceptor])) 
   ],
   bootstrap: [AppComponent]
 })

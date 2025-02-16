@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   categories: { [key: number]: string } = {};
   isLoading = false;
   errorMessage: string | null = null;
-  showCategoryForm = false;  // ✅ Variável para mostrar/esconder o formulário
+  showCategoryForm = false;  
 
   constructor(
     private productService: ProductService,
@@ -49,6 +49,7 @@ export class ProductListComponent implements OnInit {
       next: (categories: Category[]) => {
         categories.forEach((category) => {
           this.categories[category.id] = category.name;
+          console.log(category.name)
         });
       },
       error: (error) => console.error('Erro ao carregar categorias:', error)
@@ -60,12 +61,12 @@ export class ProductListComponent implements OnInit {
   }
 
   toggleCategoryForm(): void {
-    this.showCategoryForm = !this.showCategoryForm;  // ✅ Alterna a exibição do formulário
+    this.showCategoryForm = !this.showCategoryForm;
   }
 
   onCategoryCreated(newCategory: Category): void {
     this.categories[newCategory.id] = newCategory.name;
-    this.showCategoryForm = false; // ✅ Fecha o formulário após criar a categoria
+    this.showCategoryForm = false; 
   }
 
   logout(): void {
@@ -73,7 +74,6 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  // ✅ Adicionamos a função para redirecionar ao clicar em "Meus Produtos"
   goToProducts(): void {
     this.router.navigate(['/products']);
   }

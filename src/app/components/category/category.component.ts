@@ -8,7 +8,7 @@ import { CategoryService, Category } from '../../services/category.service';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  @Output() categoryCreated = new EventEmitter<Category>(); // Para informar quando uma nova categoria for criada
+  @Output() categoryCreated = new EventEmitter<Category>(); 
 
   categoryForm: FormGroup;
   categories: Category[] = [];
@@ -48,8 +48,8 @@ export class CategoryComponent implements OnInit {
       this.isLoading = true;
       this.categoryService.createCategory(this.categoryForm.value).subscribe({
         next: (newCategory) => {
-          this.categories.push(newCategory); // Adiciona a nova categoria na lista sem recarregar a página
-          this.categoryCreated.emit(newCategory); // Emite o evento de criação
+          this.categories.push(newCategory); 
+          this.categoryCreated.emit(newCategory); 
           this.categoryForm.reset();
           this.isLoading = false;
         },

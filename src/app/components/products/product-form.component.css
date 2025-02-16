@@ -6,58 +6,57 @@
     align-items: center;
     justify-content: flex-start;
     padding: 20px;
-  }
+}
   
-  .content {
+.content {
     width: 100%;
     max-width: 600px;
-  }
+}
   
-  mat-card {
+mat-card {
     width: 100%;
     padding: 20px;
-  }
+}
   
-  form {
+form {
     display: flex;
     flex-direction: column;
     gap: 16px;
     padding: 20px 0;
-  }
+}
   
-  mat-form-field {
+mat-form-field {
     width: 100%;
-  }
+}
   
-  .button-group {
+.button-group {
     display: flex;
     gap: 16px;
     justify-content: flex-end;
-  }
+}
   
-  .error-message {
+.error-message {
     color: red;
     text-align: center;
     font-size: 1rem;
     margin-top: 10px;
-  }
+}
   
-  /* Ajustes para telas menores */
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .content {
       max-width: 90%;
     }
-  }
+}
 
-  .clickable-title {
+.clickable-title {
     cursor: pointer;
     font-weight: bold;
     font-size: 1.2rem;
     color: white;
     text-decoration: none;
-  }
+}
   
-  .clickable-title:hover {
+.clickable-title:hover {
     text-decoration: underline;
-  }
+}
   

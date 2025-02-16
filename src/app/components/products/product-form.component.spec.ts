@@ -68,13 +68,13 @@ describe('ProductFormComponent', () => {
   it('should be valid when all fields are filled correctly', () => {
     component.productForm.controls['name'].setValue('Produto Teste');
     component.productForm.controls['description'].setValue('Descrição do produto');
-    component.productForm.controls['price'].setValue('100'); // ✅ Converte para string
+    component.productForm.controls['price'].setValue('100');
     component.productForm.controls['category'].setValue(1);
     expect(component.productForm.valid).toBeTruthy();
   });
 
   it('should display an error message when price is negative', () => {
-    component.productForm.controls['price'].setValue('-1'); // ✅ Converte para string negativa
+    component.productForm.controls['price'].setValue('-1'); 
     fixture.detectChanges();
     const priceError = fixture.nativeElement.querySelector('mat-error');
     expect(priceError).toBeTruthy();
@@ -83,7 +83,7 @@ describe('ProductFormComponent', () => {
   it('should call createProduct service on valid form submission', () => {
     component.productForm.controls['name'].setValue('Produto Teste');
     component.productForm.controls['description'].setValue('Descrição do produto');
-    component.productForm.controls['price'].setValue('100'); // ✅ Converte para string
+    component.productForm.controls['price'].setValue('100'); 
     component.productForm.controls['category'].setValue(1);
 
     component.onSubmit();
@@ -101,7 +101,7 @@ describe('ProductFormComponent', () => {
     
     component.productForm.controls['name'].setValue('Produto Teste');
     component.productForm.controls['description'].setValue('Descrição do produto');
-    component.productForm.controls['price'].setValue('100'); // ✅ Converte para string
+    component.productForm.controls['price'].setValue('100'); 
     component.productForm.controls['category'].setValue(1);
 
     component.onSubmit();

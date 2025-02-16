@@ -7,47 +7,47 @@
     padding: 20px;
   }
   
-  .content {
+.content {
     width: 100%;
     max-width: 600px;
-  }
+}
   
-  mat-card {
+mat-card {
     width: 100%;
     padding: 20px;
     margin-bottom: 20px;
-  }
+}
   
-  form {
+form {
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
+}
   
-  mat-form-field {
+mat-form-field {
     width: 100%;
-  }
+}
   
-  button {
+button {
     width: 100%;
-  }
+}
   
-  .error-message {
+.error-message {
     color: red;
     text-align: center;
     font-size: 1rem;
     margin-top: 10px;
-  }
+}
   
-  ul {
+ul {
     list-style: none;
     padding: 0;
-  }
+}
   
-  li {
+li {
     background: #e0e0e0;
     margin: 5px 0;
     padding: 10px;
     border-radius: 4px;
-  }
+}
   

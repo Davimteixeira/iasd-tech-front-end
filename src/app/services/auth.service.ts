@@ -24,6 +24,7 @@ export class AuthService {
         let errorMessage = 'Erro desconhecido no login.';
         if (error.error?.detail) {
           errorMessage = error.error.detail; 
+          console.log(errorMessage)
         }
         return throwError(() => new Error(errorMessage));
       })
@@ -53,8 +54,9 @@ export class AuthService {
         let errorMessage = 'Erro ao atualizar o token.';
         if (error.error?.detail) {
           errorMessage = error.error.detail;
+          console.log(errorMessage)
         }
-        this.logout(); // Logout automático se a renovação falhar
+        this.logout(); 
         return throwError(() => new Error(errorMessage));
       })
     );
