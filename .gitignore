@@ -1,3 +1,43 @@
-.angular
-dist
-node_modules
+# Compilação Angular
+/dist
+/out-tsc
+/tmp
+
+# Diretórios do Node.js
+/node_modules
+
+# IDEs e editores
+/.idea
+/.vscode
+*.sublime-workspace
+
+# Logs e relatórios do sistema
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Configuração do Angular CLI
+.angular/
+
+# Arquivos do Karma (testes)
+karma.conf.js
+
+# Arquivos TypeScript
+*.js
+*.js.map
+*.d.ts
+
+# Arquivos de ambiente
+*.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Cache do Cypress (se estiver usando)
+.cypress_cache/
+
+# Outras configurações específicas
+/.DS_Store
+Thumbs.db
