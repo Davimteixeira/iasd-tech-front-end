@@ -15,6 +15,7 @@ module.exports = function (config) {
       },
       clearContext: false,
     },
+    files: [{ pattern: 'src/**/*.spec.ts', watched: false }],
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
@@ -24,9 +25,9 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
+    autoWatch: false,
     browsers: ['ChromeHeadless'],
-    singleRun: false,
+    singleRun: true,
     restartOnFileChange: true,
   });
 };

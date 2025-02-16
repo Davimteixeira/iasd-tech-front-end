@@ -9,7 +9,7 @@ describe('AuthService', () => {
   let service: AuthService;
   let httpMock: HttpTestingController;
 
-beforeEach(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [AuthService],
@@ -18,7 +18,8 @@ beforeEach(() => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-afterEach(() => {
+  afterEach(() => {
+    localStorage.clear();
     httpMock.verify();
   });
 
@@ -43,18 +44,22 @@ afterEach(() => {
     req.flush(mockResponse);
   });
 
-  it('should register user', () => {
+  it('should register user and return response', () => {
     const mockUser = {
       username: 'testuser',
       email: 'test@example.com',
       password: 'password123',
     };
+    const mockResponse = { id: 1, ...mockUser };
 
-    service.register(mockUser).subscribe();
+    service.register(mockUser).subscribe((response) => {
+      expect(response).toEqual(mockResponse);
+    });
 
     const req = httpMock.expectOne('http://localhost:8000/api/register/');
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(mockUser);
+    req.flush(mockResponse);
   });
 
   it('should refresh token when expired', () => {
@@ -76,7 +81,7 @@ afterEach(() => {
     req.flush(mockResponse);
   });
 
-  it('should handle refresh token failure and logout user', () => {
+  it('should handle refresh token failure and logout user', (done) => {
     localStorage.setItem('refresh_token', 'invalid-token');
 
     service.refreshToken().subscribe({
@@ -84,6 +89,7 @@ afterEach(() => {
         expect(error).toBeTruthy();
         expect(localStorage.getItem('access_token')).toBeNull();
         expect(localStorage.getItem('refresh_token')).toBeNull();
+        done();
       },
     });
 
