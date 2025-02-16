@@ -33,8 +33,8 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 ### ✅ **1. Clone o repositório**
 
 ```sh
-git clone https://github.com/seu-usuario/angular-ecommerce.git
-cd angular-ecommerce
+git clone https://github.com/Davimteixeira/iasd-tech-front-end.git
+cd iasd-tech-front-end
 ```
 
 ### ✅ **2. Instale as dependências**
@@ -86,7 +86,8 @@ src/
 │   │   ├-- user.model.ts        → Interfaces para autenticação e usuários
 │   ├-- services/
 │   │   ├-- auth.service.ts      → Serviço de autenticação JWT
-│   │   ├-- product.service.ts   → Serviço para produtos e categorias
+│   │   ├-- product.service.ts   → Serviço para produtos
+│   │   ├-- category.service.ts   → Serviço para categorias
 │   ├-- app.module.ts            → Configuração principal do Angular
 │   ├-- app.routes.ts            → Definição das rotas do frontend
 │   ├-- app.component.ts         → Componente raiz
