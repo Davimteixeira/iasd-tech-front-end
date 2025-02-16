@@ -2,12 +2,11 @@ export interface Product {
   id?: number;
   name: string;
   description: string;
-  price: string; 
+  price: string;
   category: number;
   created_at?: string;
   user?: number;
 }
-
 
 export interface Category {
   readonly id: number;

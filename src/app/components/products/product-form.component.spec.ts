@@ -18,9 +18,14 @@ describe('ProductFormComponent', () => {
   let productService: jasmine.SpyObj<ProductService>;
 
   beforeEach(async () => {
-    const productServiceSpy = jasmine.createSpyObj('ProductService', ['getCategories', 'createProduct']);
+    const productServiceSpy = jasmine.createSpyObj('ProductService', [
+      'getCategories',
+      'createProduct',
+    ]);
 
-    productServiceSpy.getCategories.and.returnValue(of({ results: [{ id: 1, name: 'Eletrônicos' }] }));
+    productServiceSpy.getCategories.and.returnValue(
+      of({ results: [{ id: 1, name: 'Eletrônicos' }] })
+    );
     productServiceSpy.createProduct.and.returnValue(of({}));
 
     await TestBed.configureTestingModule({
@@ -32,14 +37,16 @@ describe('ProductFormComponent', () => {
         MatInputModule,
         MatButtonModule,
         MatSelectModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
       ],
       declarations: [ProductFormComponent],
       providers: [{ provide: ProductService, useValue: productServiceSpy }],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
-    productService = TestBed.inject(ProductService) as jasmine.SpyObj<ProductService>;
+    productService = TestBed.inject(
+      ProductService
+    ) as jasmine.SpyObj<ProductService>;
   });
 
   beforeEach(() => {
@@ -57,7 +64,7 @@ describe('ProductFormComponent', () => {
       name: '',
       description: '',
       price: '',
-      category: ''
+      category: '',
     });
   });
 
@@ -67,14 +74,16 @@ describe('ProductFormComponent', () => {
 
   it('should be valid when all fields are filled correctly', () => {
     component.productForm.controls['name'].setValue('Produto Teste');
-    component.productForm.controls['description'].setValue('Descrição do produto');
+    component.productForm.controls['description'].setValue(
+      'Descrição do produto'
+    );
     component.productForm.controls['price'].setValue('100');
     component.productForm.controls['category'].setValue(1);
     expect(component.productForm.valid).toBeTruthy();
   });
 
   it('should display an error message when price is negative', () => {
-    component.productForm.controls['price'].setValue('-1'); 
+    component.productForm.controls['price'].setValue('-1');
     fixture.detectChanges();
     const priceError = fixture.nativeElement.querySelector('mat-error');
     expect(priceError).toBeTruthy();
@@ -82,8 +91,10 @@ describe('ProductFormComponent', () => {
 
   it('should call createProduct service on valid form submission', () => {
     component.productForm.controls['name'].setValue('Produto Teste');
-    component.productForm.controls['description'].setValue('Descrição do produto');
-    component.productForm.controls['price'].setValue('100'); 
+    component.productForm.controls['description'].setValue(
+      'Descrição do produto'
+    );
+    component.productForm.controls['price'].setValue('100');
     component.productForm.controls['category'].setValue(1);
 
     component.onSubmit();
@@ -91,17 +102,21 @@ describe('ProductFormComponent', () => {
     expect(productService.createProduct).toHaveBeenCalledWith({
       name: 'Produto Teste',
       description: 'Descrição do produto',
-      price: '100', 
-      category: 1
+      price: '100',
+      category: 1,
     });
   });
 
   it('should show an error message when product creation fails', () => {
-    productService.createProduct.and.returnValue(throwError(() => new Error('Erro ao criar produto')));
-    
+    productService.createProduct.and.returnValue(
+      throwError(() => new Error('Erro ao criar produto'))
+    );
+
     component.productForm.controls['name'].setValue('Produto Teste');
-    component.productForm.controls['description'].setValue('Descrição do produto');
-    component.productForm.controls['price'].setValue('100'); 
+    component.productForm.controls['description'].setValue(
+      'Descrição do produto'
+    );
+    component.productForm.controls['price'].setValue('100');
     component.productForm.controls['category'].setValue(1);
 
     component.onSubmit();

@@ -19,10 +19,16 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "polyfills": ["zone.js"],
-            "styles": ["src/global_styles.css"],
+            "polyfills": [
+              "zone.js"
+            ],
+            "styles": [
+              "src/global_styles.css"
+            ],
             "scripts": [],
-            "assets": ["src/assets"]
+            "assets": [
+              "src/assets"
+            ]
           },
           "configurations": {
             "production": {

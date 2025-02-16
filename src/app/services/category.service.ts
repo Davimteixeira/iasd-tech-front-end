@@ -8,28 +8,26 @@ export interface Category {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
   private apiUrl = 'http://localhost:8000/api/categories/';
 
   constructor(private http: HttpClient) {}
 
-
   getCategories(): Observable<Category[]> {
     return this.http.get<{ results: Category[] }>(this.apiUrl).pipe(
-      map(response => response.results), 
-      catchError(error => {
+      map((response) => response.results),
+      catchError((error) => {
         console.error('Erro ao buscar categorias:', error);
         return throwError(() => new Error('Erro ao carregar categorias.'));
       })
     );
   }
 
-
   createCategory(category: { name: string }): Observable<Category> {
     return this.http.post<Category>(this.apiUrl, category).pipe(
-      catchError(error => {
+      catchError((error) => {
         console.error('Erro ao criar categoria:', error);
         return throwError(() => new Error('Erro ao criar categoria.'));
       })

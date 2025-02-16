@@ -1,21 +1,24 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
   let httpMock: HttpTestingController;
 
-  beforeEach(() => {
+beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AuthService]
+      providers: [AuthService],
     });
     service = TestBed.inject(AuthService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => {
+afterEach(() => {
     httpMock.verify();
   });
 
@@ -26,10 +29,10 @@ describe('AuthService', () => {
   it('should login user and store tokens', () => {
     const mockResponse = {
       access: 'mock-access-token',
-      refresh: 'mock-refresh-token'
+      refresh: 'mock-refresh-token',
     };
 
-    service.login('test@example.com', 'password').subscribe(response => {
+    service.login('test@example.com', 'password').subscribe((response) => {
       expect(response).toEqual(mockResponse);
       expect(localStorage.getItem('access_token')).toBe(mockResponse.access);
       expect(localStorage.getItem('refresh_token')).toBe(mockResponse.refresh);
@@ -42,13 +45,12 @@ describe('AuthService', () => {
 
   it('should register user', () => {
     const mockUser = {
-      username: 'testuser', 
+      username: 'testuser',
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     };
-    
+
     service.register(mockUser).subscribe();
-    
 
     const req = httpMock.expectOne('http://localhost:8000/api/register/');
     expect(req.request.method).toBe('POST');
@@ -56,10 +58,13 @@ describe('AuthService', () => {
   });
 
   it('should refresh token when expired', () => {
-    const mockResponse = { access: 'new-access-token', refresh: 'new-refresh-token' };
+    const mockResponse = {
+      access: 'new-access-token',
+      refresh: 'new-refresh-token',
+    };
     localStorage.setItem('refresh_token', 'valid-refresh-token');
 
-    service.refreshToken().subscribe(response => {
+    service.refreshToken().subscribe((response) => {
       expect(response).toEqual(mockResponse);
       expect(localStorage.getItem('access_token')).toBe(mockResponse.access);
       expect(localStorage.getItem('refresh_token')).toBe(mockResponse.refresh);
@@ -79,11 +84,14 @@ describe('AuthService', () => {
         expect(error).toBeTruthy();
         expect(localStorage.getItem('access_token')).toBeNull();
         expect(localStorage.getItem('refresh_token')).toBeNull();
-      }
+      },
     });
 
     const req = httpMock.expectOne('http://localhost:8000/api/token/refresh/');
-    req.flush({ error: 'Invalid refresh token' }, { status: 401, statusText: 'Unauthorized' });
+    req.flush(
+      { error: 'Invalid refresh token' },
+      { status: 401, statusText: 'Unauthorized' }
+    );
   });
 
   it('should clear tokens on logout', () => {

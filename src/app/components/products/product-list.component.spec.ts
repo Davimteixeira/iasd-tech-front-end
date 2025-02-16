@@ -17,7 +17,10 @@ describe('ProductListComponent', () => {
   let authService: jasmine.SpyObj<AuthService>;
 
   beforeEach(async () => {
-    const productServiceSpy = jasmine.createSpyObj('ProductService', ['getProducts', 'getCategories']);
+    const productServiceSpy = jasmine.createSpyObj('ProductService', [
+      'getProducts',
+      'getCategories',
+    ]);
     const authServiceSpy = jasmine.createSpyObj('AuthService', ['logout']);
 
     productServiceSpy.getProducts.and.returnValue(of({ results: [] }));
@@ -29,17 +32,19 @@ describe('ProductListComponent', () => {
         MatToolbarModule,
         MatCardModule,
         MatButtonModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
       ],
-      declarations: [ ProductListComponent ],
+      declarations: [ProductListComponent],
       providers: [
         { provide: ProductService, useValue: productServiceSpy },
-        { provide: AuthService, useValue: authServiceSpy }
+        { provide: AuthService, useValue: authServiceSpy },
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
-    productService = TestBed.inject(ProductService) as jasmine.SpyObj<ProductService>;
+    productService = TestBed.inject(
+      ProductService
+    ) as jasmine.SpyObj<ProductService>;
     authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
   });
 
@@ -65,7 +70,9 @@ describe('ProductListComponent', () => {
   });
 
   it('should display error message when loading products fails', () => {
-    productService.getProducts.and.returnValue(throwError(() => new Error('Erro ao carregar produtos')));
+    productService.getProducts.and.returnValue(
+      throwError(() => new Error('Erro ao carregar produtos'))
+    );
     component.loadProducts();
     fixture.detectChanges();
     expect(component.errorMessage).toBe('Erro ao carregar produtos.');

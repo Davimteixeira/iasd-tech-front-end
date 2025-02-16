@@ -5,10 +5,10 @@ import { CategoryService, Category } from '../../services/category.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
-  @Output() categoryCreated = new EventEmitter<Category>(); 
+  @Output() categoryCreated = new EventEmitter<Category>();
 
   categoryForm: FormGroup;
   categories: Category[] = [];
@@ -20,7 +20,7 @@ export class CategoryComponent implements OnInit {
     private categoryService: CategoryService
   ) {
     this.categoryForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
     });
   }
 
@@ -39,7 +39,7 @@ export class CategoryComponent implements OnInit {
         this.errorMessage = 'Erro ao carregar categorias.';
         console.error('Erro ao carregar categorias:', error);
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -48,8 +48,8 @@ export class CategoryComponent implements OnInit {
       this.isLoading = true;
       this.categoryService.createCategory(this.categoryForm.value).subscribe({
         next: (newCategory) => {
-          this.categories.push(newCategory); 
-          this.categoryCreated.emit(newCategory); 
+          this.categories.push(newCategory);
+          this.categoryCreated.emit(newCategory);
           this.categoryForm.reset();
           this.isLoading = false;
         },
@@ -57,7 +57,7 @@ export class CategoryComponent implements OnInit {
           this.errorMessage = 'Erro ao criar categoria.';
           console.error('Erro ao criar categoria:', error);
           this.isLoading = false;
-        }
+        },
       });
     }
   }

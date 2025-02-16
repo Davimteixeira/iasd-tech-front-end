@@ -7,30 +7,42 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email">
-          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email é obrigatório</mat-error>
-          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Email inválido</mat-error>
+          <input matInput formControlName="email" type="email" />
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')"
+            >Email é obrigatório</mat-error
+          >
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')"
+            >Email inválido</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Senha</mat-label>
-          <input matInput formControlName="password" type="password">
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Senha é obrigatória</mat-error>
+          <input matInput formControlName="password" type="password" />
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')"
+            >Senha é obrigatória</mat-error
+          >
         </mat-form-field>
 
-        <div *ngIf="errorMessage" class="error-message" style="color: red;">
+        <div *ngIf="errorMessage" class="error-message" style="color: red">
           {{ errorMessage }}
         </div>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loginForm.invalid || isLoading"
+        >
           <mat-spinner *ngIf="isLoading" diameter="24"></mat-spinner>
           <span *ngIf="!isLoading">Entrar</span>
         </button>
 
         <div class="register-link">
-          <span>Não tem cadastro? <a routerLink="/register">Cadastre-se</a></span>
+          <span
+            >Não tem cadastro? <a routerLink="/register">Cadastre-se</a></span
+          >
         </div>
-        
       </form>
     </mat-card-content>
   </mat-card>

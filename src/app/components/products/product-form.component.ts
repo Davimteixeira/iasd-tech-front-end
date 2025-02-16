@@ -7,7 +7,7 @@ import { Category } from '../../models/product.model';
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.css']
+  styleUrls: ['./product-form.component.css'],
 })
 export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
@@ -24,7 +24,7 @@ export class ProductFormComponent implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: ['', [Validators.required, Validators.min(0)]],
-      category: ['', Validators.required]
+      category: ['', Validators.required],
     });
   }
 
@@ -43,7 +43,7 @@ export class ProductFormComponent implements OnInit {
         this.errorMessage = 'Erro ao carregar categorias';
         console.error('Erro ao carregar categorias:', error);
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -51,17 +51,17 @@ export class ProductFormComponent implements OnInit {
     if (this.productForm.valid) {
       this.isLoading = true;
       this.errorMessage = null;
-      
+
       this.productService.createProduct(this.productForm.value).subscribe({
         next: () => {
           this.isLoading = false;
-          this.router.navigate(['/products']); 
+          this.router.navigate(['/products']);
         },
         error: (error) => {
           this.errorMessage = 'Erro ao criar produto';
           console.error('Erro ao criar produto:', error);
           this.isLoading = false;
-        }
+        },
       });
     }
   }

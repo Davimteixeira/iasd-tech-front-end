@@ -9,18 +9,23 @@
 
   <div class="content">
     <mat-spinner *ngIf="isLoading" diameter="50"></mat-spinner>
-    
+
     <div *ngIf="errorMessage" class="error-message">
       {{ errorMessage }}
     </div>
 
     <!-- Formulário de criação de categoria (inicialmente escondido) -->
-    <app-category *ngIf="showCategoryForm" (categoryCreated)="onCategoryCreated($event)"></app-category>
+    <app-category
+      *ngIf="showCategoryForm"
+      (categoryCreated)="onCategoryCreated($event)"
+    ></app-category>
 
     <mat-card *ngFor="let product of products">
       <mat-card-header>
         <mat-card-title>{{ product.name }}</mat-card-title>
-        <mat-card-subtitle>Categoria: {{ getCategoryName(product.category) }}</mat-card-subtitle>
+        <mat-card-subtitle
+          >Categoria: {{ getCategoryName(product.category) }}</mat-card-subtitle
+        >
       </mat-card-header>
       <mat-card-content>
         <p>{{ product.description }}</p>

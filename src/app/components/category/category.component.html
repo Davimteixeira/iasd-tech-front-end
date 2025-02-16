@@ -13,11 +13,18 @@
         <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="fill">
             <mat-label>Nome da Categoria</mat-label>
-            <input matInput formControlName="name">
-            <mat-error *ngIf="categoryForm.get('name')?.hasError('required')">Nome é obrigatório</mat-error>
+            <input matInput formControlName="name" />
+            <mat-error *ngIf="categoryForm.get('name')?.hasError('required')"
+              >Nome é obrigatório</mat-error
+            >
           </mat-form-field>
 
-          <button mat-raised-button color="primary" type="submit" [disabled]="categoryForm.invalid || isLoading">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="categoryForm.invalid || isLoading"
+          >
             <mat-spinner *ngIf="isLoading" diameter="24"></mat-spinner>
             <span *ngIf="!isLoading">Criar Categoria</span>
           </button>
@@ -41,7 +48,9 @@
           <li *ngFor="let category of categories">{{ category.name }}</li>
         </ul>
 
-        <p *ngIf="!isLoading && categories.length === 0">Nenhuma categoria cadastrada.</p>
+        <p *ngIf="!isLoading && categories.length === 0">
+          Nenhuma categoria cadastrada.
+        </p>
       </mat-card-content>
     </mat-card>
   </div>

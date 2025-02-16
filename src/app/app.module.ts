@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -30,7 +34,7 @@ import { authGuard } from './guards/auth.guard';
     RegisterComponent,
     ProductListComponent,
     ProductFormComponent,
-    CategoryComponent
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,10 +44,22 @@ import { authGuard } from './guards/auth.guard';
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'products', component: ProductListComponent, canActivate: [authGuard] },
-      { path: 'products/new', component: ProductFormComponent, canActivate: [authGuard] },
-      { path: 'categories', component: CategoryComponent, canActivate: [authGuard] },
-      { path: '', redirectTo: '/login', pathMatch: 'full' }
+      {
+        path: 'products',
+        component: ProductListComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'products/new',
+        component: ProductFormComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'categories',
+        component: CategoryComponent,
+        canActivate: [authGuard],
+      },
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
     ]),
     MatButtonModule,
     MatCardModule,
@@ -51,11 +67,9 @@ import { authGuard } from './guards/auth.guard';
     MatInputModule,
     MatSelectModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
-  providers: [
-    provideHttpClient(withInterceptors([authInterceptor])) 
-  ],
-  bootstrap: [AppComponent]
+  providers: [provideHttpClient(withInterceptors([authInterceptor]))],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

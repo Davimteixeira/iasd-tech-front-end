@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   categories: { [key: number]: string } = {};
   isLoading = false;
   errorMessage: string | null = null;
-  showCategoryForm = false;  
+  showCategoryForm = false;
 
   constructor(
     private productService: ProductService,
@@ -33,17 +33,16 @@ export class ProductListComponent implements OnInit {
     this.isLoading = true;
     this.productService.getProducts().subscribe({
       next: (response) => {
-        this.products = response.results; 
+        this.products = response.results;
         this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Erro ao carregar produtos.';
         console.error('Erro ao carregar produtos:', error);
         this.isLoading = false;
-      }
+      },
     });
   }
-  
 
   loadCategories(): void {
     this.categoryService.getCategories().subscribe({
@@ -52,7 +51,7 @@ export class ProductListComponent implements OnInit {
           this.categories[category.id] = category.name;
         });
       },
-      error: (error) => console.error('Erro ao carregar categorias:', error)
+      error: (error) => console.error('Erro ao carregar categorias:', error),
     });
   }
 
@@ -61,12 +60,12 @@ export class ProductListComponent implements OnInit {
   }
 
   toggleCategoryForm(): void {
-    this.showCategoryForm = !this.showCategoryForm;  
+    this.showCategoryForm = !this.showCategoryForm;
   }
 
   onCategoryCreated(newCategory: Category): void {
     this.categories[newCategory.id] = newCategory.name;
-    this.showCategoryForm = false; 
+    this.showCategoryForm = false;
   }
 
   logout(): void {

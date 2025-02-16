@@ -17,8 +17,13 @@ describe('CategoryComponent', () => {
   let categoryService: jasmine.SpyObj<CategoryService>;
 
   beforeEach(async () => {
-    const categoryServiceSpy = jasmine.createSpyObj('CategoryService', ['getCategories', 'createCategory']);
-    categoryServiceSpy.getCategories.and.returnValue(of({ results: [{ id: 1, name: 'Eletrônicos' }] }));
+    const categoryServiceSpy = jasmine.createSpyObj('CategoryService', [
+      'getCategories',
+      'createCategory',
+    ]);
+    categoryServiceSpy.getCategories.and.returnValue(
+      of({ results: [{ id: 1, name: 'Eletrônicos' }] })
+    );
     categoryServiceSpy.createCategory.and.returnValue(of({}));
 
     await TestBed.configureTestingModule({
@@ -29,16 +34,16 @@ describe('CategoryComponent', () => {
         MatInputModule,
         MatButtonModule,
         MatProgressSpinnerModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
       ],
-      declarations: [ CategoryComponent ],
-      providers: [
-        { provide: CategoryService, useValue: categoryServiceSpy }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [CategoryComponent],
+      providers: [{ provide: CategoryService, useValue: categoryServiceSpy }],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
 
-    categoryService = TestBed.inject(CategoryService) as jasmine.SpyObj<CategoryService>;
+    categoryService = TestBed.inject(
+      CategoryService
+    ) as jasmine.SpyObj<CategoryService>;
   });
 
   beforeEach(() => {
@@ -56,7 +61,9 @@ describe('CategoryComponent', () => {
   });
 
   it('should show error message when category creation fails', () => {
-    categoryService.createCategory.and.returnValue(throwError(() => new Error('Erro ao criar categoria')));
+    categoryService.createCategory.and.returnValue(
+      throwError(() => new Error('Erro ao criar categoria'))
+    );
     component.categoryForm.controls['name'].setValue('Nova Categoria');
     component.onSubmit();
     expect(component.errorMessage).toBe('Erro ao criar categoria.');
