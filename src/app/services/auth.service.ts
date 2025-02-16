@@ -28,7 +28,7 @@ export class AuthService {
           this.storeTokens(response);
           this.isAuthenticatedSubject.next(true);
         }),
-        catchError(this.handleError) // Usa o novo método de tratamento de erros
+        catchError(this.handleError)
       );
   }
 
@@ -40,7 +40,7 @@ export class AuthService {
     return this.http
       .post<User>(`${this.apiUrl}/register/`, user, {
         headers: new HttpHeaders({ Accept: 'application/json' }),
-        responseType: 'json', // Certifica-se de que o Angular trata como JSON
+        responseType: 'json',
       })
       .pipe(catchError(this.handleError));
   }
@@ -86,7 +86,6 @@ export class AuthService {
     localStorage.setItem('refresh_token', response.refresh);
   }
 
-  /** Novo método para lidar com erros **/
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Erro desconhecido.';
     if (error.status === 0) {
