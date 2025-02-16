@@ -11,8 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class RegisterComponent {
   registerForm: FormGroup;
   isLoading = false;
-  registerError: string | null = null;
-
+  registerErrors: string[] = []; 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -26,21 +25,41 @@ export class RegisterComponent {
   }
 
   onSubmit(): void {
-    console.log(this.registerForm.value);
-    if (this.registerForm.valid) {
-      this.isLoading = true;
-      this.registerError = null;
+    if (this.registerForm.invalid) return;
 
-      this.authService.register(this.registerForm.value).subscribe({
-        next: () => {
-          this.isLoading = false;
-          this.router.navigate(['/login']); 
-        },
-        error: (error) => {
-          this.isLoading = false;
-          this.registerError = error.error?.message || 'Erro desconhecido ao registrar';
+    this.isLoading = true;
+    this.registerErrors = [];
+
+    this.authService.register(this.registerForm.value).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/login']); 
+      },
+      error: (error) => {
+        this.isLoading = false;
+        this.registerErrors = this.extractErrorMessages(error);
+      }
+    });
+  }
+
+  private extractErrorMessages(error: any): string[] {
+
+    let messages: string[] = [];
+
+    if (error.message) {
+      messages.push(error.message);
+    } else if (error.error && typeof error.error === 'object') {
+      Object.entries(error.error).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          messages.push(...value); 
+        } else if (typeof value === 'string') {
+          messages.push(value);
         }
       });
+    } else {
+      messages.push("Erro desconhecido ao registrar.");
     }
+
+    return messages;
   }
 }

@@ -4,35 +4,39 @@
     align-items: center;
     height: 100vh;
     background-color: #f5f5f5;
-  }
+}
   
-  mat-card {
+mat-card {
     max-width: 400px;
     width: 90%;
     padding: 20px;
-  }
+}
   
-  form {
+form {
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
+}
   
-  mat-form-field {
+mat-form-field {
     width: 100%;
-  }
+}
   
-  button {
+button {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-  }
+}
   
-  .error-text {
+.error-text {
     color: red;
     margin-top: 10px;
     text-align: center;
-  }
+}
   
+.error-container div {
+  display: block; 
+  margin-top: 5px;
+}

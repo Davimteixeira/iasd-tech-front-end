@@ -32,10 +32,8 @@ describe('RegisterComponent', () => {
         MatProgressSpinnerModule,
         NoopAnimationsModule
       ],
-      declarations: [ RegisterComponent ],
-      providers: [
-        { provide: AuthService, useValue: authServiceSpy }
-      ],
+      declarations: [RegisterComponent],
+      providers: [{ provide: AuthService, useValue: authServiceSpy }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
@@ -109,8 +107,13 @@ describe('RegisterComponent', () => {
     expect(spinner).toBeTruthy();
   });
 
-  it('should show an error message when registration fails', () => {
-    authService.register.and.returnValue(throwError(() => ({ error: { message: 'Email já existe' } })));
+  it('should show error messages when registration fails', () => {
+    authService.register.and.returnValue(throwError(() => ({
+      error: {
+        username: ["Usuário com este username já existe."],
+        email: ["Usuário com este email já existe."]
+      }
+    })));
 
     component.registerForm.controls['username'].setValue('testuser');
     component.registerForm.controls['email'].setValue('test@example.com');
@@ -118,6 +121,12 @@ describe('RegisterComponent', () => {
     component.onSubmit();
     fixture.detectChanges();
 
-    expect(component.registerError).toBe('Email já existe');
+    expect(component.registerErrors).toContain("Usuário com este username já existe.");
+    expect(component.registerErrors).toContain("Usuário com este email já existe.");
+
+    const errorMessages = fixture.nativeElement.querySelectorAll('.error-container mat-error');
+    expect(errorMessages.length).toBe(2);
+    expect(errorMessages[0].textContent).toContain("Usuário com este username já existe.");
+    expect(errorMessages[1].textContent).toContain("Usuário com este email já existe.");
   });
 });

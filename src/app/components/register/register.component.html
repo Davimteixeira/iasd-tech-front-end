@@ -34,9 +34,14 @@
         <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid || isLoading">
           <mat-spinner *ngIf="isLoading" diameter="24"></mat-spinner>
           <span *ngIf="!isLoading">Registrar</span>
+          <span *ngIf="isLoading">Registrando...</span>
         </button>
 
-        <mat-error *ngIf="registerError" class="error-text">Falha no registro: {{ registerError }}</mat-error>
+        <div *ngIf="registerErrors.length > 0" class="error-container">
+          <div *ngFor="let error of registerErrors">
+            <mat-error>{{ error }}</mat-error>
+          </div>
+        </div>
       </form>
       <p>Já tem uma conta? <a routerLink="/login">Faça login aqui</a></p>
     </mat-card-content>
