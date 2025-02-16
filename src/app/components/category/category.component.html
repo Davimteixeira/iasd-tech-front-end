@@ -29,6 +29,9 @@
             <span *ngIf="!isLoading">Criar Categoria</span>
           </button>
         </form>
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
       </mat-card-content>
     </mat-card>
 
@@ -39,10 +42,6 @@
       </mat-card-header>
       <mat-card-content>
         <mat-spinner *ngIf="isLoading" diameter="50"></mat-spinner>
-
-        <div *ngIf="errorMessage" class="error-message">
-          {{ errorMessage }}
-        </div>
 
         <ul *ngIf="!isLoading && categories.length > 0">
           <li *ngFor="let category of categories">{{ category.name }}</li>
